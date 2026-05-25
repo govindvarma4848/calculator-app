@@ -1,5 +1,5 @@
 # Modern Digital Calculator
-
+![Calculator Preview](calculator-preview.png.bmp)
 A modern responsive calculator built using HTML, CSS, and JavaScript.
 
 ## Features
