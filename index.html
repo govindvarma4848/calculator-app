@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Digital Calculator | Sleek Glassmorphic Utility</title>
+    <!-- Modern geometry font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background design accents for ambient cosmic glowing effect -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Centered Glassmorphic Calculator Container -->
+    <main class="calculator-container">
+        <div class="calculator">
+            
+            <!-- Calculator Header / Status Area -->
+            <div class="calculator-header">
+                <span class="brand-title">NEO CALC</span>
+                <div class="status-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+            </div>
+
+            <!-- Calculator Display Panel -->
+            <div class="display">
+                <!-- Upper display for current equation/history -->
+                <div class="display-expression" id="display-expression" aria-live="polite"></div>
+                <!-- Main display for input/results -->
+                <div class="display-current" id="display-current" aria-live="polite">0</div>
+            </div>
+
+            <!-- Calculator Grid Keypad -->
+            <div class="keypad">
+                <!-- Row 1: Commands and Operators -->
+                <button class="btn btn-clear" data-action="clear" id="btn-clear" aria-label="Clear">C</button>
+                <button class="btn btn-function" data-action="backspace" id="btn-backspace" aria-label="Backspace">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;">
+                        <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0 -2-2z"></path>
+                        <line x1="18" y1="9" x2="12" y2="15"></line>
+                        <line x1="12" y1="9" x2="18" y2="15"></line>
+                    </svg>
+                </button>
+                <button class="btn btn-function" data-action="percent" id="btn-percent" aria-label="Percentage">%</button>
+                <button class="btn btn-operator" data-action="operator" data-value="/" id="btn-divide" aria-label="Divide">÷</button>
+
+                <!-- Row 2: Digits 7, 8, 9 and Multiplier -->
+                <button class="btn btn-number" data-value="7" id="btn-7">7</button>
+                <button class="btn btn-number" data-value="8" id="btn-8">8</button>
+                <button class="btn btn-number" data-value="9" id="btn-9">9</button>
+                <button class="btn btn-operator" data-action="operator" data-value="*" id="btn-multiply" aria-label="Multiply">×</button>
+
+                <!-- Row 3: Digits 4, 5, 6 and Subtractor -->
+                <button class="btn btn-number" data-value="4" id="btn-4">4</button>
+                <button class="btn btn-number" data-value="5" id="btn-5">5</button>
+                <button class="btn btn-number" data-value="6" id="btn-6">6</button>
+                <button class="btn btn-operator" data-action="operator" data-value="-" id="btn-subtract" aria-label="Subtract">−</button>
+
+                <!-- Row 4: Digits 1, 2, 3 and Adder -->
+                <button class="btn btn-number" data-value="1" id="btn-1">1</button>
+                <button class="btn btn-number" data-value="2" id="btn-2">2</button>
+                <button class="btn btn-number" data-value="3" id="btn-3">3</button>
+                <button class="btn btn-operator" data-action="operator" data-value="+" id="btn-add" aria-label="Add">+</button>
+
+                <!-- Row 5: Digit 0, Decimal point and Equalizer -->
+                <button class="btn btn-number btn-zero" data-value="0" id="btn-0">0</button>
+                <button class="btn btn-number" data-value="." id="btn-decimal">.</button>
+                <button class="btn btn-equals" data-action="calculate" id="btn-equals" aria-label="Equal">=</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Core Javascript Logic -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+/* 
+================================================================
+   NEO CALC - PREMIUM GLASSMORPHIC CALCULATOR STYLESHEET
+   Aesthetics: Deep cosmic dark theme, Frosted glass UI, Active scaling,
+               Gradients, Ambient glow effects, and modern CSS grid.
+================================================================
+*/
+
+/* -------------------------------------------------------------
+   1. DESIGN TOKENS (CSS Variables)
+------------------------------------------------------------- */
+:root {
+    /* Color Palette */
+    --color-bg-start: #0a0f1d;
+    --color-bg-end: #03050a;
+    
+    --color-glass-bg: rgba(15, 22, 42, 0.45);
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --color-glass-glow: rgba(255, 255, 255, 0.03);
+    
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-text-accent: #38bdf8;
+    
+    /* Button Colors & Gradients */
+    --color-btn-num: rgba(255, 255, 255, 0.04);
+    --color-btn-num-hover: rgba(255, 255, 255, 0.08);
+    --color-btn-num-border: rgba(255, 255, 255, 0.04);
+    
+    --color-btn-func: rgba(56, 189, 248, 0.08);
+    --color-btn-func-hover: rgba(56, 189, 248, 0.15);
+    --color-btn-func-text: #38bdf8;
+    
+    --gradient-op: linear-gradient(135deg, #6366f1, #3b82f6);
+    --gradient-op-hover: linear-gradient(135deg, #818cf8, #60a5fa);
+    
+    --gradient-eq: linear-gradient(135deg, #a855f7, #06b6d4);
+    --gradient-eq-hover: linear-gradient(135deg, #c084fc, #22d3ee);
+    
+    --gradient-clear: linear-gradient(135deg, #ef4444, #f97316);
+    --gradient-clear-hover: linear-gradient(135deg, #f87171, #fb923c);
+
+    /* Shadows & Effects */
+    --shadow-main: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
+                  0 0 40px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    --shadow-btn-glow: 0 0 15px rgba(59, 130, 246, 0.3);
+    
+    /* Typography */
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    
+    /* Layout Dimensions */
+    --calc-width: 370px;
+    --border-radius-main: 28px;
+    --border-radius-btn: 18px;
+    
+    /* Animations */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------
+   2. BASE STYLES & RESET
+------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    user-select: none; /* Prevents text selection during rapid clicking */
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: radial-gradient(circle at center, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    color: var(--color-text-primary);
+}
+
+/* Ambient glow orbs in the background for a modern cosmic design */
+.ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glow-1 {
+    width: 450px;
+    height: 450px;
+    background: #3b82f6;
+    top: 15%;
+    left: 10%;
+    animation: floating-glow-1 20s infinite alternate ease-in-out;
+}
+
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    background: #8b5cf6;
+    bottom: 15%;
+    right: 10%;
+    animation: floating-glow-2 25s infinite alternate ease-in-out;
+}
+
+@keyframes floating-glow-1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+@keyframes floating-glow-2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-40px, -50px) scale(0.9); }
+}
+
+/* -------------------------------------------------------------
+   3. CALCULATOR SHELL
+------------------------------------------------------------- */
+.calculator-container {
+    width: 100%;
+    max-width: var(--calc-width);
+    padding: 20px;
+    z-index: 1; /* Place above ambient background glows */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(25px) saturate(190%);
+    -webkit-backdrop-filter: blur(25px) saturate(190%);
+    border-radius: var(--border-radius-main);
+    width: 100%;
+    padding: 24px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle highlights internal to the glassmorphic card */
+.calculator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, var(--color-glass-glow) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: var(--border-radius-main) var(--border-radius-main) 0 0;
+}
+
+/* Calculator header details */
+.calculator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+    margin-bottom: -4px;
+}
+
+.brand-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+}
+
+.status-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.status-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.status-dots .red { background-color: #ef4444; }
+.status-dots .yellow { background-color: #f59e0b; }
+.status-dots .green { background-color: #10b981; }
+
+/* -------------------------------------------------------------
+   4. DISPLAY PANEL
+------------------------------------------------------------- */
+.display {
+    background: rgba(2, 6, 23, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 110px;
+    word-break: break-all;
+    word-wrap: break-word;
+    position: relative;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.display-expression {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    min-height: 1.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+    opacity: 0.85;
+    transition: var(--transition-normal);
+}
+
+.display-current {
+    font-size: 2.3rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    overflow-x: auto; /* Handles extremely large calculations with a clean scroll */
+    scrollbar-width: none; /* Hide default scrollbars */
+    transition: var(--transition-fast);
+}
+
+/* Hide webkit scrollbar */
+.display-current::-webkit-scrollbar {
+    display: none;
+}
+
+/* -------------------------------------------------------------
+   5. KEYPAD GRID
+------------------------------------------------------------- */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* Base button styles */
+.btn {
+    aspect-ratio: 1; /* Ensures perfectly circular/square proportions */
+    border-radius: var(--border-radius-btn);
+    border: 1px solid transparent;
+    font-size: 1.35rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--transition-fast);
+    outline: none;
+}
+
+/* Base key states and compression feedback */
+.btn:active {
+    transform: scale(0.93) translateY(1px) !important;
+    filter: brightness(0.85) !important;
+}
+
+/* --- Number Buttons --- */
+.btn-number {
+    background: var(--color-btn-num);
+    color: var(--color-text-primary);
+    border-color: var(--color-btn-num-border);
+}
+
+.btn-number:hover {
+    background: var(--color-btn-num-hover);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* The double-width zero key */
+.btn-zero {
+    grid-column: span 2;
+    aspect-ratio: auto; /* Allow flexible width instead of strict square */
+    height: 100%;
+    justify-content: flex-start;
+    padding-left: 28px;
+}
+
+/* --- Functional Helper Buttons (Backspace, Percent) --- */
+.btn-function {
+    background: var(--color-btn-func);
+    color: var(--color-btn-func-text);
+}
+
+.btn-function:hover {
+    background: var(--color-btn-func-hover);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* --- Red Clear Button --- */
+.btn-clear {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+}
+
+.btn-clear:hover {
+    background: var(--gradient-clear);
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+/* --- Operations Buttons (+, -, *, /) --- */
+.btn-operator {
+    background: var(--gradient-op);
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+}
+
+.btn-operator:hover {
+    background: var(--gradient-op-hover);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.45);
+}
+
+/* Equal Button Gradient */
+.btn-equals {
+    background: var(--gradient-eq);
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    box-shadow: 0 4px 18px rgba(168, 85, 247, 0.35);
+}
+
+.btn-equals:hover {
+    background: var(--gradient-eq-hover);
+    box-shadow: 0 4px 24px rgba(6, 182, 212, 0.55);
+}
+
+/* Visual indication when a button is keyboard-triggered */
+.btn.keyboard-active {
+    transform: scale(0.93) translateY(1px);
+    filter: brightness(0.85);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* -------------------------------------------------------------
+   6. RESPONSIVENESS AND ACCESSIBILITY
+------------------------------------------------------------- */
+@media (max-width: 400px) {
+    :root {
+        --calc-width: 100%;
+        --border-radius-main: 22px;
+        --border-radius-btn: 14px;
+    }
+    
+    .calculator {
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    .keypad {
+        gap: 8px;
+    }
+    
+    .btn {
+        font-size: 1.2rem;
+    }
+    
+    .display {
+        padding: 16px;
+        min-height: 95px;
+    }
+    
+    .display-current {
+        font-size: 2rem;
+    }
+}
+
+/* Height-based media query to ensure calculator doesn't get cut off vertically on shorter screens */
+@media (max-height: 650px) {
+    body {
+        align-items: flex-start;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        overflow-y: auto;
+    }
+    
+    .calculator-container {
+        padding: 10px;
+    }
+}
+
+/* Accessible focus styling for keyboard navigation */
+.btn:focus-visible {
+    outline: 2px solid var(--color-text-accent);
+    outline-offset: 2px;
+}
